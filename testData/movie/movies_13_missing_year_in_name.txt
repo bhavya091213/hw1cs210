@@ -1,0 +1,5 @@
+Adventure|101|Toy Story
+Comedy|102|Clueless (1995)
+Action|103|Heat (1995)
+Drama|104|The Usual Suspects (1995)
+Sci-Fi|105|12 Monkeys (1995)

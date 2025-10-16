@@ -1,0 +1,5 @@
+Adventure|1|Toy Story (1995)
+Adventure|2|Jumanji (1995)
+Adventure|8|Tom and Huck (1995)
+Comedy|3|Grumpier Old Men (1995)
+Comedy|4|Waiting to Exhale (1995)

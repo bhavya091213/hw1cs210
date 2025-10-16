@@ -1,0 +1,5 @@
+comedy|171|Clueless (1995)
+COMEDY|172|Grumpier Old Men (1995)
+Comedy|173|Waiting to Exhale (1995)
+CoMeDy|174|The Birdcage (1996)
+COMeDy|175|Ace Ventura: When Nature Calls (1995)

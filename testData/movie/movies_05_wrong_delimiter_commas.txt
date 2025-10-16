@@ -1,0 +1,8 @@
+Adventure,21,Toy Story (1995)
+Comedy,22,Clueless (1995)
+Action,23,Heat (1995)
+Drama,24,The Usual Suspects (1995)
+Sci-Fi,25,12 Monkeys (1995)
+Animation,26,Toy Story 2 (1999)
+Thriller,27,Se7en (1995)
+Romance,28,Before Sunrise (1995)

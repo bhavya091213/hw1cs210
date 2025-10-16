@@ -1,0 +1,6 @@
+Adventure|31|Toy Story (1995)
+Comedy||Clueless (1995)
+Action|33|Heat (1995)
+Drama|34
+Sci-Fi|35|12 Monkeys (1995)
+Animation|36|Toy Story 2 (1999)

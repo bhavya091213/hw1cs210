@@ -1,0 +1,5 @@
+Adventure|71|Toy Story (1995)
+Comedy|71|Clueless (1995)
+Action|73|Heat (1995)
+Drama|74|The Usual Suspects (1995)
+Sci-Fi|75|12 Monkeys (1995)

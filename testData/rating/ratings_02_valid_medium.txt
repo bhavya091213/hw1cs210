@@ -1,0 +1,14 @@
+Toy Story (1995)|3|201
+Heat (1995)|4|202
+Clueless (1995)|5|203
+Jumanji (1995)|0|204
+12 Monkeys (1995)|1|205
+The Usual Suspects (1995)|2|206
+Before Sunrise (1995)|3|207
+Sudden Death (1995)|4|208
+toy story (1995)|4|222
+heat (1995)|5|223
+CLUeLeSS (1995)|2|224
+JUMANJI (1995)|3|225
+12 monkeys (1995)|4|226
+the usual suspects (1995)|5|227

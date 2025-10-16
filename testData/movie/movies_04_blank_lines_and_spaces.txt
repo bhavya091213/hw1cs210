@@ -1,0 +1,7 @@
+  Adventure  |  11  |  Toy Story 2 (1999)  
+Comedy|12| Clueless (1995)   
+   
+	
+Action | 13 | Die Hard With a Vengeance (1995)   
+Drama|14|   The Usual Suspects (1995)
+Romance | 15 | Before Sunrise (1995) 
