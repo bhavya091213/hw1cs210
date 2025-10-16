@@ -1,0 +1,81 @@
+
+
+Chatbot Sessions Links:
+
+
+ChatGPT session link for movie_recommender.py generation: [link]
+
+ChatGPT session link for test_movie_recommender.py generation: [link]
+
+
+
+
+Chatbots Used:
+
+ChatGPT was used for both coding and testing portions. We typically used it for structuring the project and functions.
+
+
+
+
+Case sensitivity Handling 
+
+Movie names and genres were processed in a case insensitive manner for comparison and searching to avoid mismatches (Comedy vs comedy).
+
+User IDs and ratings were treated as case sensitive and numeric respectively, as per specifications.
+
+The chatbot did not automatically normalize cases in all comparisons. We added .lower() when comparing genres and movie names for consistency.
+
+
+
+
+Unclear Code / Chatbot Explanations:
+
+Some generated code used dictionary comprehension and nested loops in a way that was initially confusing.
+
+We prompted ChatGPT to explain step-by-step:
+
+How average ratings were calculated per movie and per genre.
+
+How user preferences were aggregated across genres.
+
+Features that were not covered in class included:
+
+defaultdict usage for grouping ratings.
+
+Sorting by multiple keys using sorted() with a lambda function.
+
+The explanations helped us understand both Python language features and logic structure.
+
+
+
+
+Input Data Issues Handling:
+
+Generated code included these measures:
+
+Ignoring empty lines or rows with missing fields.
+
+Converting ratings to float and skipping rows with non numeric ratings.
+
+Removing duplicate ratings by the same user for a movie.
+
+Stripping whitespace around fields to prevent mismatch errors.
+
+Handling movies with no ratings properly by excluding them from averages.
+
+
+
+
+Issues Not Handled by AI Code and Fixes:
+
+A potential issue we had was deformed movie file rows with extra pipe characters.
+
+To fix this we added a check to make sure exactly 3 fields per line exist in movies.txt.
+
+Another potential issue was with tiebreaking when multiple genres or movies had the same average rating.
+
+To fix this we sorted ties alphabetically to maintain output.
+
+Another potential issue was user rating files with invalid user IDs (like empty).
+
+To fix this we added validation to skip invalid rows and log warnings.

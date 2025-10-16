@@ -1,0 +1,61 @@
+Group Members & Contributions
+
+
+Bhavya Patel (bbp53)
+
+Led the prompting for generating movie_recommender.py code.
+
+Reviewed code structure for clarity and proper function decomposition.
+
+Verified CLI design matched project specifications.
+
+Provided suggestions for handling input edge cases (empty lines, malformed data).
+
+Assisted in debugging issues with genre popularity calculations.
+
+
+
+
+Aaryan Bhardwaj (ab2640)
+
+Led the prompting for generating test_movie_recommender.py code.
+
+Ensured that automated tests covered all required features and edge cases.
+
+Verified output consistency with expected results.
+
+Contributed to testing input files for a wide distribution of data and potential errors.
+
+Assisted in documenting testing methodology for testing_doc.pdf.
+
+
+
+
+Parth Parekh (pvp70)
+
+Prompted aspects of movie_recommender.py, also made refinements to the code for testing. refinements include:
+
+Fixing bugs and logic inconsistencies in the code for testing.
+
+Enhancing code readability and adding docstring documentation for functions.
+
+Led documentation efforts, drafting answers for coding and testing documentation questions.
+
+Coordinated integration of all code and testing scripts.
+
+Assisted both Bhavya and Aaryan in debugging and reviewing chatbot-generated code.
+
+Ensured final code was compatible with Python 3.12 and followed submission requirements.
+
+
+
+
+Group Collaboration
+
+All three members reviewed AI generated code for correctness.
+
+Shared responsibility in testing edge cases and ensuring the CLI worked as intended.
+
+Maintained regular communication to discuss strategy, resolve errors, and finalize documentation.
+
+Each member contributed meaningfully to prompting, code refinement, testing, and documentation.
