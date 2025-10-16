@@ -1,0 +1,6 @@
+Adventure|161|Toy Story (1995)
+Comedy|162|Clueless (1995)
+Action|163|Heat (1995)
+Drama|164|The Usual Suspects (1995)
+Sci-Fi|165|12 Monkeys (1995)
+Romance|166|Before Sunrise (1995)

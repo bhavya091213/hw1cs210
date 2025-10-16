@@ -1,0 +1,403 @@
+=== test_movie_recommender.py ===
+
+Missing rating test files (skipping those):
+  - ratings_22_very_long_movie_name.txt
+
+Movie Suite 1 (movies_01_valid_small.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 2 (movies_02_valid_medium.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 3 (movies_03_valid_large_150.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 4 (movies_04_blank_lines_and_spaces.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 5 (movies_05_wrong_delimiter_commas.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 6 (movies_06_missing_field_too_few_columns.txt)
+  ✗ movies load — expected ABORT, observed OK
+
+Movie Suite 7 (movies_07_extra_field_too_many_columns.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 8 (movies_08_non_integer_id.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 9 (movies_09_negative_id.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 10 (movies_10_duplicate_id_conflict.txt)
+  ✗ movies load — expected ABORT, observed OK
+
+Movie Suite 11 (movies_11_duplicate_name_same_year_diff_id.txt)
+  ✗ movies load — expected ABORT, observed OK
+
+Movie Suite 12 (movies_12_case_only_duplicate_merge_ok.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 13 (movies_13_missing_year_in_name.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 14 (movies_14_malformed_year_text.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 15 (movies_15_missing_closing_paren.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 16 (movies_16_trailing_delimiter.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 17 (movies_17_unicode_whitespace_nbsp.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 18 (movies_18_bom_utf8.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 19 (movies_19_mixed_newlines.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 20 (movies_20_genre_case_variants.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 21 (movies_21_very_long_title.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 22 (movies_22_exact_duplicate_lines.txt)
+  ✓ movies load — expected OK, observed OK
+
+Movie Suite 23 (movies_23_whitespace_variation_in_year_format.txt)
+  ✗ movies load — expected ABORT, observed OK
+
+Movie Suite 24 (movies_24_tab_delimited.txt)
+  ✓ movies load — expected ABORT, observed ABORT
+
+Movie Suite 25 (movies_25_trailing_leading_spaces_only.txt)
+  ✓ movies load — expected OK, observed OK
+
+Ratings Suite 1 (ratings_01_valid_small.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 2 (ratings_02_valid_medium.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 3 (ratings_03_valid_large_200.txt × movies_02_valid_medium.txt)
+  ✗ ratings load — expected OK, observed ABORT
+
+Ratings Suite 4 (ratings_04_blank_lines_and_spaces.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 5 (ratings_09_out_of_range_ratings.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 6 (ratings_12_duplicate_user_movie_keep_first.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 7 (ratings_13_unknown_movies_rows_skipped.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 8 (ratings_14_case_only_duplicate_same_user.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 9 (ratings_15_year_whitespace_variation.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 10 (ratings_16_bom_utf8.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 11 (ratings_17_mixed_newlines.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 12 (ratings_18_unicode_whitespace_nbsp.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 13 (ratings_20_trailing_leading_spaces_only.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 14 (ratings_21_exact_duplicate_lines.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 15 (ratings_24_large_user_ids.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 16 (ratings_25_mixed_valid_outofrange_unknown.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected OK, observed OK
+
+Ratings Suite 17 (ratings_05_wrong_delimiter_commas.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 18 (ratings_06_missing_field_too_few_columns.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 19 (ratings_07_extra_field_too_many_columns.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 20 (ratings_08_non_numeric_rating_text.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 21 (ratings_08b_non_numeric_rating_NaN.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 22 (ratings_08c_non_numeric_rating_inf.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 23 (ratings_10_non_integer_user_id.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 24 (ratings_11_negative_user_id.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 25 (ratings_19_tab_delimited.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Ratings Suite 26 (ratings_23_float_like_user_id.txt × movies_02_valid_medium.txt)
+  ✓ ratings load — expected ABORT, observed ABORT
+
+Integration Suite 1 (movies_02_valid_medium.txt × ratings_02_valid_medium.txt)
+  running features…
+------ Feature: Movie Popularity (All) ------
+
+=== Movie Popularity (All) ===
+1) Heat (1995) — Avg: 4.50 (Count: 2) — Genre: Action
+2) Sudden Death (1995) — Avg: 4.00 (Count: 1) — Genre: Action
+3) Toy Story (1995) — Avg: 3.50 (Count: 2) — Genre: Adventure
+4) Jumanji (1995) — Avg: 1.50 (Count: 2) — Genre: Adventure
+5) Father of the Bride Part II (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+6) GoldenEye (1995) — Avg: 0.00 (Count: 0) — Genre: Action
+7) Grumpier Old Men (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+8) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0) — Genre: Action
+9) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0) — Genre: Adventure
+10) Sample Movie 13 (2003) — Avg: 0.00 (Count: 0) — Genre: Comedy
+11) Sample Movie 14 (2004) — Avg: 0.00 (Count: 0) — Genre: Drama
+12) Sample Movie 15 (2005) — Avg: 0.00 (Count: 0) — Genre: Horror
+13) Sample Movie 16 (2006) — Avg: 0.00 (Count: 0) — Genre: Romance
+14) Sample Movie 17 (2007) — Avg: 0.00 (Count: 0) — Genre: Sci-Fi
+15) Sample Movie 18 (2008) — Avg: 0.00 (Count: 0) — Genre: Thriller
+16) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0) — Genre: Action
+17) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0) — Genre: Adventure
+18) Sample Movie 21 (2011) — Avg: 0.00 (Count: 0) — Genre: Comedy
+19) Sample Movie 22 (2012) — Avg: 0.00 (Count: 0) — Genre: Drama
+20) Tom and Huck (1995) — Avg: 0.00 (Count: 0) — Genre: Adventure
+21) Waiting to Exhale (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+
+------ Feature: Movie Popularity in Genre (first genre) ------
+
+=== Movie Popularity by Genre ===
+Available genres:
+1) Action
+2) Adventure
+3) Comedy
+4) Drama
+5) Horror
+6) Romance
+7) Sci-Fi
+8) Thriller
+
+--- Action ---
+1) Heat (1995) — Avg: 4.50 (Count: 2)
+2) Sudden Death (1995) — Avg: 4.00 (Count: 1)
+3) GoldenEye (1995) — Avg: 0.00 (Count: 0)
+4) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0)
+5) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0)
+
+------ Feature: Genre Popularity ------
+
+=== Genre Popularity ===
+1) Action — Avg of avgs: 4.25 (Total ratings: 3)
+2) Adventure — Avg of avgs: 2.50 (Total ratings: 4)
+
+------ Feature: User Preference for Genre (user 201) ------
+
+=== User Preference for Genre ===
+Available user IDs:
+  201, 202, 204, 208, 222, 223, 225
+
+Top Genre for User 201: Adventure — Your Avg: 3.00 (Count: 1)
+
+------ Feature: Recommend Movies (user 201) ------
+
+=== Recommend Movies ===
+Available user IDs:
+  201, 202, 204, 208, 222, 223, 225
+
+Preferred Genre for User 201: Adventure — Avg: 3.00 (Count: 1)
+
+Top Recommendations:
+1) Jumanji (1995) — Avg: 1.50 (Count: 2)
+2) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0)
+3) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0)
+
+------ Feature: Reload Data ------
+
+=== Reload Data ===
+Clearing data...Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /                  Loading movies...Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /                   Loading ratings...Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /                    ✅ Data loaded successfully.
+
+
+Integration Suite 2 (movies_02_valid_medium.txt × ratings_21_exact_duplicate_lines.txt)
+  running features…
+------ Feature: Movie Popularity (All) ------
+
+=== Movie Popularity (All) ===
+1) Heat (1995) — Avg: 5.00 (Count: 1) — Genre: Action
+2) Toy Story (1995) — Avg: 4.00 (Count: 1) — Genre: Adventure
+3) Father of the Bride Part II (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+4) GoldenEye (1995) — Avg: 0.00 (Count: 0) — Genre: Action
+5) Grumpier Old Men (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+6) Jumanji (1995) — Avg: 0.00 (Count: 0) — Genre: Adventure
+7) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0) — Genre: Action
+8) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0) — Genre: Adventure
+9) Sample Movie 13 (2003) — Avg: 0.00 (Count: 0) — Genre: Comedy
+10) Sample Movie 14 (2004) — Avg: 0.00 (Count: 0) — Genre: Drama
+11) Sample Movie 15 (2005) — Avg: 0.00 (Count: 0) — Genre: Horror
+12) Sample Movie 16 (2006) — Avg: 0.00 (Count: 0) — Genre: Romance
+13) Sample Movie 17 (2007) — Avg: 0.00 (Count: 0) — Genre: Sci-Fi
+14) Sample Movie 18 (2008) — Avg: 0.00 (Count: 0) — Genre: Thriller
+15) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0) — Genre: Action
+16) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0) — Genre: Adventure
+17) Sample Movie 21 (2011) — Avg: 0.00 (Count: 0) — Genre: Comedy
+18) Sample Movie 22 (2012) — Avg: 0.00 (Count: 0) — Genre: Drama
+19) Sudden Death (1995) — Avg: 0.00 (Count: 0) — Genre: Action
+20) Tom and Huck (1995) — Avg: 0.00 (Count: 0) — Genre: Adventure
+21) Waiting to Exhale (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+
+------ Feature: Movie Popularity in Genre (first genre) ------
+
+=== Movie Popularity by Genre ===
+Available genres:
+1) Action
+2) Adventure
+3) Comedy
+4) Drama
+5) Horror
+6) Romance
+7) Sci-Fi
+8) Thriller
+
+--- Action ---
+1) Heat (1995) — Avg: 5.00 (Count: 1)
+2) GoldenEye (1995) — Avg: 0.00 (Count: 0)
+3) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0)
+4) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0)
+5) Sudden Death (1995) — Avg: 0.00 (Count: 0)
+
+------ Feature: Genre Popularity ------
+
+=== Genre Popularity ===
+1) Action — Avg of avgs: 5.00 (Total ratings: 1)
+2) Adventure — Avg of avgs: 4.00 (Total ratings: 1)
+
+------ Feature: User Preference for Genre (user 2101) ------
+
+=== User Preference for Genre ===
+Available user IDs:
+  2101, 2102
+
+Top Genre for User 2101: Adventure — Your Avg: 4.00 (Count: 1)
+
+------ Feature: Recommend Movies (user 2101) ------
+
+=== Recommend Movies ===
+Available user IDs:
+  2101, 2102
+
+Preferred Genre for User 2101: Adventure — Avg: 4.00 (Count: 1)
+
+Top Recommendations:
+1) Jumanji (1995) — Avg: 0.00 (Count: 0)
+2) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0)
+3) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0)
+
+------ Feature: Reload Data ------
+
+=== Reload Data ===
+Clearing data...Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /                  Loading movies...Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /                   Loading ratings...Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /                    ✅ Data loaded successfully.
+
+
+Integration Suite 3 (movies_02_valid_medium.txt × ratings_24_large_user_ids.txt)
+  running features…
+------ Feature: Movie Popularity (All) ------
+
+=== Movie Popularity (All) ===
+1) Toy Story (1995) — Avg: 5.00 (Count: 1) — Genre: Adventure
+2) Heat (1995) — Avg: 4.00 (Count: 1) — Genre: Action
+3) Father of the Bride Part II (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+4) GoldenEye (1995) — Avg: 0.00 (Count: 0) — Genre: Action
+5) Grumpier Old Men (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+6) Jumanji (1995) — Avg: 0.00 (Count: 0) — Genre: Adventure
+7) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0) — Genre: Action
+8) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0) — Genre: Adventure
+9) Sample Movie 13 (2003) — Avg: 0.00 (Count: 0) — Genre: Comedy
+10) Sample Movie 14 (2004) — Avg: 0.00 (Count: 0) — Genre: Drama
+11) Sample Movie 15 (2005) — Avg: 0.00 (Count: 0) — Genre: Horror
+12) Sample Movie 16 (2006) — Avg: 0.00 (Count: 0) — Genre: Romance
+13) Sample Movie 17 (2007) — Avg: 0.00 (Count: 0) — Genre: Sci-Fi
+14) Sample Movie 18 (2008) — Avg: 0.00 (Count: 0) — Genre: Thriller
+15) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0) — Genre: Action
+16) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0) — Genre: Adventure
+17) Sample Movie 21 (2011) — Avg: 0.00 (Count: 0) — Genre: Comedy
+18) Sample Movie 22 (2012) — Avg: 0.00 (Count: 0) — Genre: Drama
+19) Sudden Death (1995) — Avg: 0.00 (Count: 0) — Genre: Action
+20) Tom and Huck (1995) — Avg: 0.00 (Count: 0) — Genre: Adventure
+21) Waiting to Exhale (1995) — Avg: 0.00 (Count: 0) — Genre: Comedy
+
+------ Feature: Movie Popularity in Genre (first genre) ------
+
+=== Movie Popularity by Genre ===
+Available genres:
+1) Action
+2) Adventure
+3) Comedy
+4) Drama
+5) Horror
+6) Romance
+7) Sci-Fi
+8) Thriller
+
+--- Action ---
+1) Heat (1995) — Avg: 4.00 (Count: 1)
+2) GoldenEye (1995) — Avg: 0.00 (Count: 0)
+3) Sample Movie 11 (2001) — Avg: 0.00 (Count: 0)
+4) Sample Movie 19 (2009) — Avg: 0.00 (Count: 0)
+5) Sudden Death (1995) — Avg: 0.00 (Count: 0)
+
+------ Feature: Genre Popularity ------
+
+=== Genre Popularity ===
+1) Adventure — Avg of avgs: 5.00 (Total ratings: 1)
+2) Action — Avg of avgs: 4.00 (Total ratings: 1)
+
+------ Feature: User Preference for Genre (user 9876543210) ------
+
+=== User Preference for Genre ===
+Available user IDs:
+  9876543210, 9876543211
+
+Top Genre for User 9876543210: Adventure — Your Avg: 5.00 (Count: 1)
+
+------ Feature: Recommend Movies (user 9876543210) ------
+
+=== Recommend Movies ===
+Available user IDs:
+  9876543210, 9876543211
+
+Preferred Genre for User 9876543210: Adventure — Avg: 5.00 (Count: 1)
+
+Top Recommendations:
+1) Jumanji (1995) — Avg: 0.00 (Count: 0)
+2) Sample Movie 12 (2002) — Avg: 0.00 (Count: 0)
+3) Sample Movie 20 (2010) — Avg: 0.00 (Count: 0)
+
+------ Feature: Reload Data ------
+
+=== Reload Data ===
+Clearing data...Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /Clearing data... -Clearing data... \Clearing data... |Clearing data... /                  Loading movies...Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /Loading movies... -Loading movies... \Loading movies... |Loading movies... /                   Loading ratings...Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /Loading ratings... -Loading ratings... \Loading ratings... |Loading ratings... /                    ✅ Data loaded successfully.
+
+
+Summary
+  Test Suites: 49 passed, 5 failed, 0 skipped, 54 total
+  Tests:       64 passed, 5 failed, 0 skipped, 69 total
+  Time:        55.01s
+

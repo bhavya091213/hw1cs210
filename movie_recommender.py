@@ -12,15 +12,25 @@ Implements:
   6) Reload data
   7) Quit
 
-Data & Parsing Rules (strict):
+Data & Parsing Rules:
 - Movies file rows:   genre|movie_id|movie_name
+  * Abort for: malformed rows, empty file, negative movie_id.
+  * Abort for title/year format errors: movie_name must end with "(YYYY)" where YYYY is 4 digits.
+  * Abort if the same conceptual movie (case-insensitive title, normalized whitespace, same year)
+    appears with a different movie_id.
+  * Abort if a movie_id is reused for a different conceptual movie.
+  * Case-only duplicates with the same ID are allowed (keeps the first record).
+
 - Ratings file rows:  movie_name|rating|user_id
-- Abort load and re-prompt for: malformed rows, empty file, non-numeric rating, any out-of-range rating (0–5 inclusive).
-- Duplicate ratings (same user_id + movie_name): keep the first, ignore later duplicates.
+  * Abort for: malformed rows, empty file, non-numeric or non-finite rating (NaN/inf), non-integer user_id,
+    negative user_id anywhere in the file.
+  * Skip (do NOT abort) rows with rating out of range [0, 5].
+  * Skip (do NOT abort) rows whose movie_name is not found in the loaded movies.
+  * Duplicate ratings (same user_id + movie_name): keep the first, ignore later duplicates.
+
 - Genres are case-insensitive internally, but display with original casing from the movies file.
-- Movie names are considered the same only if they differ by case alone (same length, same characters ignoring case, including year).
-  If more than case differs, they are different movies.
-- User IDs are parsed and stored as ints.
+- Movie names are equal iff same letters ignoring case AND same length (year is part of the name) — used
+  for canonicalizing display keys. Separately, "conceptual duplicates" are detected by normalized title + (YYYY).
 
 CLI:
 - Always accept q/Q to quit and b/B to go back.
@@ -35,6 +45,8 @@ from __future__ import annotations
 import os
 import sys
 import time
+import re
+import math
 from typing import Dict, List, Tuple, Optional, Any
 
 # =========================
@@ -159,11 +171,34 @@ def _parse_movies_line(line: str, line_no: int) -> Tuple[str, int, str]:
     return genre, movie_id, movie_name
 
 
+# --- Concept-level (title + year) validation helpers for MOVIES ---
+_YEAR_RE = re.compile(r'^(?P<title>.+?)\s*\(\s*(?P<year>\d{4})\s*\)\s*$')
+
+def _extract_title_year(movie_name: str, line_no: int) -> tuple[str, int]:
+    """
+    Enforce 'Title (YYYY)' with a 4-digit year. Title is normalized by collapsing inner whitespace.
+    """
+    m = _YEAR_RE.match(movie_name)
+    if not m:
+        raise LoadError(f"Movies file malformed at line {line_no}: movie_name must end with (YYYY).")
+    title = " ".join(m.group("title").split())  # collapse multiple spaces into single
+    year = int(m.group("year"))
+    return title, year
+
+def _concept_key(movie_name: str, line_no: int) -> str:
+    """
+    Build a conceptual key 'title (YYYY)' with title lowercased and whitespace-normalized.
+    """
+    title, year = _extract_title_year(movie_name, line_no)
+    return f"{title.lower()} ({year})"
+
+
 def _parse_ratings_line(line: str, line_no: int) -> Tuple[str, float, int]:
     """
     Parse a ratings line: movie_name|rating|user_id
     Returns (movie_name, rating, user_id)
-    Raises LoadError for malformed rows or non-numeric rating.
+    Raises LoadError for malformed rows or non-numeric/non-finite rating or non-integer user_id.
+    (Out-of-range rating and unknown movie handling are done in the loader and do not abort.)
     """
     parts = line.rstrip("\n").split("|")
     if len(parts) != 3:
@@ -175,8 +210,8 @@ def _parse_ratings_line(line: str, line_no: int) -> Tuple[str, float, int]:
         rating = float(rating_s)
     except ValueError:
         raise LoadError(f"Ratings file malformed at line {line_no}: rating is not numeric.")
-    if not (0.0 <= rating <= 5.0):
-        raise LoadError(f"Ratings file malformed at line {line_no}: rating {rating} out of bounds (0–5).")
+    if not math.isfinite(rating):
+        raise LoadError(f"Ratings file malformed at line {line_no}: rating must be finite (no NaN/inf).")
     try:
         user_id = int(user_id_s)
     except ValueError:
@@ -196,18 +231,45 @@ def load_movies_file(path: str) -> None:
     if not os.path.isfile(path):
         raise LoadError("Movies file does not exist.")
 
-    with open(path, "r", encoding="utf-8") as f:
+    # BOM tolerant
+    with open(path, "r", encoding="utf-8-sig") as f:
         lines = [ln for ln in (l.strip("\n") for l in f) if ln.strip()]
 
     if not lines:
         raise LoadError("Movies file is empty.")
 
+    # Track conceptual duplicates and id conflicts
+    concept_to_id: Dict[str, int] = {}
+
     for i, raw in enumerate(lines, start=1):
         genre_original, movie_id, movie_name_raw = _parse_movies_line(raw, i)
-        # Merge / canonicalize movie name by case-insensitive equivalence
+
+        # negative id → abort
+        if movie_id < 0:
+            raise LoadError(f"Movies file malformed at line {i}: movie_id cannot be negative.")
+
+        # Must look like Title (YYYY)
+        ck = _concept_key(movie_name_raw, i)
+
+        # same concept with different id → abort
+        prev_id = concept_to_id.get(ck)
+        if prev_id is not None and prev_id != movie_id:
+            raise LoadError(
+                f"Movies file malformed at line {i}: same title+year concept appears with different IDs."
+            )
+        concept_to_id.setdefault(ck, movie_id)
+
+        # duplicate ID used for a different concept → abort
+        if movie_id in MOVIES_BY_ID:
+            existing_ck = _concept_key(MOVIES_BY_ID[movie_id]["name"], i)
+            if existing_ck != ck:
+                raise LoadError(
+                    f"Movies file malformed at line {i}: movie_id {movie_id} reused for a different movie."
+                )
+
+        # Merge / canonicalize display name by case-insensitive same-length equivalence
         canonical_name = _get_canonical_movie_name(movie_name_raw)
 
-        # If it's a new canonical, create entry; if not, reuse the canonical key
         if canonical_name not in MOVIES_BY_NAME:
             # Insert movie record
             MOVIES_BY_NAME[canonical_name] = {
@@ -218,13 +280,13 @@ def load_movies_file(path: str) -> None:
             }
             MOVIES_BY_ID[movie_id] = MOVIES_BY_NAME[canonical_name]
         else:
-            # If a duplicate ID or conflicting data shows up, treat as malformed row
+            # If same display-name canonical but different ID → abort
             existing = MOVIES_BY_NAME[canonical_name]
             if existing["movie_id"] != movie_id:
                 raise LoadError(
-                    f"Movies file malformed at line {i}: Same movie name (case-insensitive) with different IDs."
+                    f"Movies file malformed at line {i}: same movie name (case-insensitive) with different IDs."
                 )
-            # else: ignore duplicate line with same info
+            # else: duplicate line with same info → ignore
 
         # Track genre mapping
         norm_g = _norm_genre(genre_original)
@@ -239,12 +301,13 @@ def load_ratings_file(path: str) -> None:
       - RATINGS_BY_USER
       - USER_IDS
       - (observes duplicate rating policy: keep first)
-    Raises LoadError on any validation failure (abort load).
+    Aborts on file-level validation failures; skips per-row issues as per rules.
     """
     if not os.path.isfile(path):
         raise LoadError("Ratings file does not exist.")
 
-    with open(path, "r", encoding="utf-8") as f:
+    # BOM tolerant
+    with open(path, "r", encoding="utf-8-sig") as f:
         lines = [ln for ln in (l.strip("\n") for l in f) if ln.strip()]
 
     if not lines:
@@ -255,19 +318,24 @@ def load_ratings_file(path: str) -> None:
     for i, raw in enumerate(lines, start=1):
         movie_name_raw, rating, user_id = _parse_ratings_line(raw, i)
 
-        # Map rating's movie_name to a canonical movie from MOVIES_BY_NAME
-        # Strategy: find canonical key if any matches by case-insensitive same-length rule.
+        # negative user id → abort whole file
+        if user_id < 0:
+            raise LoadError(f"Ratings file malformed at line {i}: user_id cannot be negative.")
+
+        # out-of-range rating → skip row (do NOT abort)
+        if not (0.0 <= rating <= 5.0):
+            continue
+
+        # map to canonical movie (case-insensitive, same-length rule)
         canonical_name = None
         for existing in MOVIES_BY_NAME.keys():
             if _case_insensitive_equal_same_length(existing, movie_name_raw):
                 canonical_name = existing
                 break
 
+        # unknown movie → skip row (do NOT abort)
         if canonical_name is None:
-            # No corresponding movie found in the movies catalog -> malformed
-            raise LoadError(
-                f"Ratings file malformed at line {i}: movie '{movie_name_raw}' not found in movies file."
-            )
+            continue
 
         key = (user_id, canonical_name)
         if key in seen_user_movie:
